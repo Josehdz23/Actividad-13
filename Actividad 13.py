@@ -26,7 +26,7 @@ def ingreso():
             for i in range(NoRepartidores):
                 print(f"\nRepartidor {i+1}: ")
                 while True:
-                    nombre = input("Ingrese nombre: ")
+                    nombre = input("Ingrese nombre: ").upper()
                     if nombre in repartidores:
                         print(f"El nombre ({nombre}) ya existe, reintente")
                     else:
@@ -87,10 +87,10 @@ def busqueda_secuencial(lista, busqueda):
 
 def buscarRepartidor():
     if repartidores:
-        buscar = input("Ingrese el nombre de un repartidor: ")
+        buscar = input("Ingrese el nombre de un repartidor: ").upper()
         b = busqueda_secuencial(list(repartidores.keys()), buscar)
         if b != -1:
-            print(f"{buscar} entregó {repartidores[buscar]['repartidos']} paquetes")
+            print(f"{buscar} entregó {repartidores[buscar].cantidad} paquetes")
         else:
             print("No existe ese repartidor")
     else:
@@ -106,18 +106,18 @@ def estadisticas():
         menor = []
         print("\n= = = = = ESTADISTICAS = = = = =")
         for datos in repartidores.values():
-            total = total + datos["repartidos"]
+            total = total + datos.cantidad
         for clave, dato in repartidores.items():
-            if dato["repartidos"] > may:
-                may = dato["repartidos"]
-                mayor = (clave, dato["repartidos"])
+            if dato.cantidad > may:
+                may = dato.cantidad
+                mayor = (clave, dato.cantidad)
                 if b == 0:
-                    min = dato["repartidos"]
-                    menor = (clave, dato["repartidos"])
+                    min = dato.cantidad
+                    menor = (clave, dato.cantidad)
                     b = b + 1
-            elif dato["repartidos"] < min:
-                min = dato["repartidos"]
-                menor = (clave, dato["repartidos"])
+            elif dato.cantidad < min:
+                min = dato.cantidad
+                menor = (clave, dato.cantidad)
 
         promedio = total / len(repartidores)
         print(f"El total de paquetes entregados es: {total}")
